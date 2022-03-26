@@ -1,0 +1,110 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreateTaskInput {
+  """Description of task"""
+  description: String!
+
+  """Title of task"""
+  title: String!
+}
+
+input CreateUserInput {
+  """First Name"""
+  firstName: String!
+
+  """Last Name"""
+  lastName: String!
+
+  """Password"""
+  password: String!
+
+  """User Name"""
+  username: String!
+}
+
+type LoginResponse {
+  access_token: String!
+  user: User!
+}
+
+input LoginUserInput {
+  password: String!
+  username: String!
+}
+
+type Mutation {
+  createTask(createTaskInput: CreateTaskInput!): Task!
+  login(loginUserInput: LoginUserInput!): LoginResponse!
+  removeTask(id: Int!): Task!
+  removeUser(id: Int!): User!
+  signUp(createUserInput: CreateUserInput!): User!
+  updateTask(updateTaskInput: UpdateTaskInput!): Task!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+}
+
+type Query {
+  task(id: Int!): Task!
+  tasks: [Task!]!
+}
+
+"""Task"""
+type Task {
+  """Status of task"""
+  completed: Boolean!
+
+  """Description of task"""
+  description: String!
+
+  """Primary key"""
+  id: ID!
+
+  """Title of task"""
+  title: String!
+}
+
+input UpdateTaskInput {
+  """Description of task"""
+  description: String
+  id: Int!
+
+  """Title of task"""
+  title: String
+}
+
+input UpdateUserInput {
+  """First Name"""
+  firstName: String
+  id: Int!
+
+  """Last Name"""
+  lastName: String
+
+  """Password"""
+  password: String
+
+  """User Name"""
+  username: String
+}
+
+"""Task"""
+type User {
+  """First Name"""
+  firstName: String!
+
+  """Primary Key"""
+  id: ID!
+
+  """User's profile status"""
+  isActive: Boolean!
+
+  """Last Name"""
+  lastName: String!
+
+  """Password"""
+  password: String!
+
+  """User Name"""
+  username: String!
+}
