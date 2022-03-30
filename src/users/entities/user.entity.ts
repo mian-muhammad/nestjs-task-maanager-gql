@@ -4,9 +4,11 @@ import {
   BeforeUpdate,
   Column,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import { Task } from 'src/tasks/entities/task.entity';
 
 @Entity()
 @ObjectType({ description: 'Task' })
@@ -34,6 +36,9 @@ export class User {
   @Column({ default: true })
   @Field({ description: `User's profile status` })
   isActive: boolean;
+
+  @OneToMany(() => Task, (task) => task.user)
+  tasks: Task[];
 
   @BeforeInsert()
   @BeforeUpdate()

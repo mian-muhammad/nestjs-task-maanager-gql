@@ -11,20 +11,23 @@ export class TasksService {
     @InjectRepository(Task) private readonly taskRepository: Repository<Task>,
   ) {}
 
-  create(createTaskInput: CreateTaskInput) {
+  create(createTaskInput: CreateTaskInput, user) {
     const task = new Task();
     task.title = createTaskInput.title;
     task.description = createTaskInput.description;
+    task.user = user;
 
     return this.taskRepository.save(task);
   }
 
-  findAll() {
-    return this.taskRepository.find();
+  findAll(user) {
+    return this.taskRepository.find({
+      where: { user },
+    });
   }
 
-  async findOne(id: number) {
-    const result = await this.taskRepository.findOne({ where: { id } });
+  async findOne(id: number, user) {
+    const result = await this.taskRepository.findOne({ where: { id, user } });
     return result;
   }
 
